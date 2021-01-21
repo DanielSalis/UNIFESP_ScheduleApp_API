@@ -3,3 +3,6 @@
 
 #Arquivo de variáveis de ambiente
 .env
+
+#debugg
+launch.json
