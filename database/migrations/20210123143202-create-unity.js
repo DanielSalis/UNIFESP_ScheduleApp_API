@@ -2,23 +2,25 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('schedule_type', {
-
-      id: {
+    return queryInterface.createTable('unity', {
+      id:{
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-
-      type: {
+      name:{
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      adress:{
         type: Sequelize.STRING,
         allowNull: false,
       }
-    })
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('schedule_type');
+    return queryInterface.dropTable('unity');
   }
 };
