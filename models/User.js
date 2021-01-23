@@ -9,7 +9,7 @@ class User extends Model{
           name: DataTypes.STRING,
           last_name: DataTypes.STRING,
           email: DataTypes.STRING,
-          password: DataTypes.STRING
+          password: DataTypes.STRING,
           
         }, {
             sequelize,
@@ -17,7 +17,13 @@ class User extends Model{
             tableName: 'user'
         })
       }
-    
+
+    static associate(models) {
+      this.belongsTo(models.Profile, { foreignKey: 'profile_id' });
+      this.belongsTo(models.ScheduleType, { foreignKey: 'schedule_type_id'});
+      this.belongsTo(models.Department, { foreignKey: 'department_id'});
+      this.belongsTo(models.VacationType, { foreignKey: 'vacation_type_id'});
+    }
 }
 
 module.exports = User
