@@ -13,11 +13,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-
-      adress: {
-        type: Sequelize.STRING,
-        allowNull: false,
       }
     })
   },
