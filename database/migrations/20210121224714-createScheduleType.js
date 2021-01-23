@@ -14,11 +14,6 @@ module.exports = {
       type: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-
-      duration: {
-        type: Sequelize.INTEGER,
-         allowNull: false,
       }
     })
   },
