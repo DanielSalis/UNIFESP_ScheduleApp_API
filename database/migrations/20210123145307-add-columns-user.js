@@ -46,17 +46,6 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           }),
-
-        queryInterface.addColumn(
-          'user',
-          'activity_record_id',
-          {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            references: {model: 'activity_record', key: 'id'},
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE'
-          }) 
     ])
   },
 
