@@ -12,7 +12,8 @@ app.use(express.json({extend: false}));
 //Routes
 //Pasta routes ~> Pasta api ~> arquivo hello
 app.use('/api/hello', require('./routes/api/hello'));
-app.use('/api/user', require('./routes/api/user'))
+app.use('/api/user', require('./routes/api/user'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 const PORT = process.env.PORT ? process.env.PORT : 3333;
 

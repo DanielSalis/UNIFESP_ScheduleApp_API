@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
 
@@ -33,17 +36,55 @@ router.get('/getAll', async(request,response)=>{
 // @route  POST api/users/create
 // @desc   Create User
 // @acess  Public
-router.post('/create', async(request, response) =>{
-  const {name, last_name, email, password, profile_id, schedule_type_id, vacation_type_id, department_id} = request.body;
+router.post('/create',
+  [
+    check('name', 'Name is required').not().isEmpty(),
+    check('email', 'Please include a valid email').isEmail(),
+    check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }),
+    check('profile_id', 'Please enter with a profile id').not().isEmpty()
+  ], 
 
-  try{
+  async(request, response) =>{
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+        return response.status(400).json({ errors: errors.array() });
+    }
+
+    let {name, last_name, email, password, profile_id, schedule_type_id, vacation_type_id, department_id} = request.body;
+
+    const UserByEmail = await User.findOne({
+      where:{
+        email:email
+      }
+    })
+
+    if(UserByEmail){
+      return response.json({'Message':'Usuário já existe'});
+    };
+       
+    try{
+      const salt = await bcrypt.genSalt(5);
+      const encryptedpassword = await bcrypt.hash(password, salt);
+      password = encryptedpassword
+
       const user = await User.create({ name, last_name, email, password, profile_id, schedule_type_id, vacation_type_id, department_id});
-      return response.json(user);
-  }
-  catch (error){
-      console.log(error);
-      return response.sendStatus(500);
-  }
+      const payload = {
+        'user':{
+          id: user.id
+        }
+      }
+
+      jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1 days' }, (err, token) => {
+        if (err) {
+          throw err;
+        }
+        return response.status(200).json({ token });
+      });
+    }
+    catch (error){
+        console.log(error.message);
+        return response.sendStatus(500);
+    }
 });
 
 // @route  POST api/users/deleteById
