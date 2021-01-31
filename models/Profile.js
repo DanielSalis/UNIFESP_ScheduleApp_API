@@ -9,13 +9,10 @@ class Profile extends Model{
         }, {
             sequelize,
             modelName: 'Profile',
-            tableName: 'profile'
+            tableName: 'profile',
+            timestamps: false
         })
       }
-
-    static associate(models) {
-      this.hasMany(models.User, { foreignKey: 'user_id'});
-    }
 }
 
 module.exports = Profile

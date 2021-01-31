@@ -6,6 +6,7 @@ const Profile = require('../models/Profile');
 const Department = require('../models/Department');
 const ScheduleType = require('../models/ScheduleType');
 const VacationType = require('../models/VacationType');
+const Unity = require('../models/Unity');
 
 const Connection = new Sequelize(dbConfig);
 
@@ -14,6 +15,7 @@ Profile.init(Connection);
 Department.init(Connection);
 ScheduleType.init(Connection);
 VacationType.init(Connection);
+Unity.init(Connection);
 
 
 User.associate(Connection.models);
@@ -21,6 +23,7 @@ User.associate(Connection.models);
 // Department.associate(Connection.models);
 // ScheduleType.associate(Connection.models);
 // VacationType.associate(Connection.models);
+
 
 module.exports = Connection;
 
