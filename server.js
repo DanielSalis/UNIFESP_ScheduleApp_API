@@ -14,6 +14,9 @@ app.use(express.json({extend: false}));
 app.use('/api/hello', require('./routes/api/hello'));
 app.use('/api/user', require('./routes/api/user'));
 app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/unity', require('./routes/api/unity'));
+app.use('/api/department', require('./routes/api/department'));
+app.use('/api/profile', require('./routes/api/profile'));
 
 const PORT = process.env.PORT ? process.env.PORT : 3333;
 
