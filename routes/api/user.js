@@ -33,6 +33,19 @@ router.get('/getAll', async(request,response)=>{
   }
 });
 
+// @route  POST api/users/getAllByProfileId/:id
+// @desc   Get user by id
+// @acess  Public
+router.get('/getAllByProfileId/:id', async(request,response)=>{
+  try{
+    const users = await User.findAll({where:{profile_id:request.params.id}});
+    return response.json(users)
+  }  
+  catch(error){
+    return response.sendStatus(500);
+  }
+});
+
 // @route  POST api/users/create
 // @desc   Create User
 // @acess  Public
