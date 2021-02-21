@@ -72,7 +72,7 @@ router.post('/create',
     })
 
     if(UserByEmail){
-      return response.json({'Message':'Usuário já existe'});
+      return response.status(500).json({'Message':'Usuário já existe'});
     };
        
     try{
