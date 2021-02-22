@@ -10,6 +10,7 @@ const Calendar = require('../models/Calendar');
 const CalendarDays = require('../models/CalendarDays');
 const Unity = require('../models/Unity');
 const PresenceType = require('../models/PresenceType');
+const ActivityRecord = require('../models/ActivityRecord');
 
 const Connection = new Sequelize(dbConfig);
 
@@ -22,6 +23,7 @@ Calendar.init(Connection);
 CalendarDays.init(Connection);
 Unity.init(Connection);
 PresenceType.init(Connection);
+ActivityRecord.init(Connection);
 
 
 User.associate(Connection.models);

@@ -20,6 +20,7 @@ app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/calendar', require('./routes/api/calendar'));
 app.use('/api/calendarDays', require('./routes/api/calendarDays'));
 app.use('/api/presenceTypes', require('./routes/api/presenceTypes'));
+app.use('/api/activityRecord', require('./routes/api/activityRecord'));
 
 const PORT = process.env.PORT ? process.env.PORT : 3333;
 
