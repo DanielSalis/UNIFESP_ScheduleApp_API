@@ -4,7 +4,8 @@ const auth = require('../../middlewares/auth');
 const { check, validationResult } = require('express-validator');
 
 const Calendar = require('../../models/Calendar');
-const CalendarDays = require('../../models/CalendarDays')
+const CalendarDays = require('../../models/CalendarDays');
+const ActivityRecord = require('../../models/ActivityRecord');
 
 // @route  POST api/calendar/create
 // @desc   POST create Calendar
@@ -66,6 +67,7 @@ router.get('/getAll', auth, async (req,res)=>{
 // @acess  Private
 router.post('/deleteById', auth, async (req,res)=>{
     try{
+        const  activityRecords = await ActivityRecord.destroy({where: {},truncate: true})
         const calendar = await Calendar.destroy({where:{id:req.body.id}});
         return res.json({'Message': 'Calendário excluido com sucesso!', calendar: calendar});
     }catch(error){
